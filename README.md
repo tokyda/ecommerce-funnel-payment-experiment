@@ -87,6 +87,17 @@ This is the loop the project is trying to demonstrate: diagnose → hypothesise 
 
 ---
 
+## Datasets
+
+| Dataset | Source | Files used |
+|---|---|---|
+| E-commerce funnel | [aerodinamicc on Kaggle](https://www.kaggle.com/datasets/aerodinamicc/ecommerce-website-funnel-analysis) | `home_page_table.csv`, `search_page_table.csv`, `payment_page_table.csv`, `payment_confirmation_table.csv`, `user_table.csv` |
+| A/B test (Udacity) | [kexinlin on GitHub](https://github.com/kexinlin/Udacity-Data-Analysis-2018-Basic/blob/master/Project4/countries.csv) | `ab_data.csv`, `countries.csv` |
+
+Both datasets are excluded from this repository via `.gitignore`. Place the CSV files in `data/raw/` before running dbt.
+
+---
+
 ## Running the project
 
 ```bash
