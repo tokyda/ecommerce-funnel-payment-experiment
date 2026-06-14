@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: stg_funnel_home
+    description: "Home page visitors — entry point of the funnel"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_funnel_search
+    description: "Users who progressed to the search page"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_funnel_payment
+    description: "Users who reached the payment page"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_funnel_confirmation
+    description: "Users who completed the purchase"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_users
+    description: "User demographics: device type and gender"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: device
+        description: "Device type: mobile or desktop (lowercased)"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['mobile', 'desktop']
+      - name: gender
+        description: "User gender: male or female (lowercased)"
+        data_tests:
+          - not_null
+
+  - name: stg_experiment
+    description: "Raw A/B test rows — one row per user-event (users may appear multiple times)"
+    columns:
+      - name: user_id
+        description: "User identifier — not unique at this layer"
+        data_tests:
+          - not_null
+      - name: experiment_group
+        description: "Experiment assignment: control or treatment"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['control', 'treatment']
+      - name: converted
+        description: "Conversion outcome: 0 or 1"
+        data_tests:
+          - not_null
+
+  - name: stg_countries
+    description: "Country assignment for A/B test participants"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: country
+        description: "Country code"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['US', 'UK', 'CA']

@@ -1,0 +1,21 @@
+# Data — raw CSVs and compiled DuckDB file are excluded (too large for git)
+data/raw/
+data/*.duckdb
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# dbt artifacts
+dbt_project/target/
+dbt_project/logs/
+dbt_project/dbt_packages/
+
+# macOS
+.DS_Store

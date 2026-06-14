@@ -1,0 +1,7 @@
+funnel_analysis:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/funnel_analysis.duckdb'
+      threads: 4

@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: int_user_journey
+    description: >
+      One row per user who visited the home page. Boolean flags track progression
+      through each funnel step. Joined with device and gender for segmentation.
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: device
+        description: "Device type: mobile or desktop"
+      - name: gender
+        description: "User gender"
+      - name: visited_home
+        description: "Always true — home page is the funnel entry point"
+        data_tests:
+          - not_null
+      - name: visited_search
+        description: "Whether the user reached the search page"
+        data_tests:
+          - not_null
+      - name: visited_payment
+        description: "Whether the user reached the payment page"
+        data_tests:
+          - not_null
+      - name: completed_purchase
+        description: "Whether the user completed the purchase"
+        data_tests:
+          - not_null
+
+  - name: int_experiment
+    description: >
+      Deduplicated A/B test assignments. Rows with mismatched group/page pairs are
+      removed. One row per user, enriched with country for geographic segmentation.
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: experiment_group
+        description: "Experiment group: control or treatment"
+        data_tests:
+          - not_null
+      - name: converted
+        description: "Conversion outcome: 0 or 1"
+        data_tests:
+          - not_null

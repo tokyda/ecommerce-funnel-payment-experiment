@@ -1,0 +1,64 @@
+version: 2
+
+sources:
+  - name: raw_funnel
+    description: "Raw e-commerce funnel CSV files (aerodinamicc, Kaggle)"
+    tables:
+      - name: home_page_table
+        description: "All users who visited the home page"
+        columns:
+          - name: user_id
+            description: "Unique user identifier"
+          - name: page
+            description: "Always 'home_page'"
+
+      - name: search_page_table
+        description: "Users who proceeded to the search page"
+        columns:
+          - name: user_id
+          - name: page
+
+      - name: payment_page_table
+        description: "Users who reached the payment page"
+        columns:
+          - name: user_id
+          - name: page
+
+      - name: payment_confirmation_table
+        description: "Users who completed the purchase"
+        columns:
+          - name: user_id
+          - name: page
+
+      - name: user_table
+        description: "User demographics — device type and gender"
+        columns:
+          - name: user_id
+          - name: date
+            description: "Session date"
+          - name: device
+            description: "Desktop or Mobile"
+          - name: sex
+            description: "Male or Female"
+
+  - name: raw_experiment
+    description: "A/B test data (Udacity)"
+    tables:
+      - name: ab_data
+        description: "Experiment assignments and conversion outcomes (~294K rows)"
+        columns:
+          - name: user_id
+          - name: timestamp
+          - name: group
+            description: "control or treatment"
+          - name: landing_page
+            description: "old_page or new_page"
+          - name: converted
+            description: "0 or 1"
+
+      - name: countries
+        description: "Geographic assignment for experiment users"
+        columns:
+          - name: user_id
+          - name: country
+            description: "US, UK, or CA"

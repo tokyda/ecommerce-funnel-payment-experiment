@@ -1,0 +1,24 @@
+name: 'funnel_analysis'
+version: '1.0.0'
+config-version: 2
+
+profile: 'funnel_analysis'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Relative to dbt_project/ — override with absolute path if running from elsewhere
+  raw_data_path: "../data/raw"
+
+models:
+  funnel_analysis:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    mart:
+      +materialized: table

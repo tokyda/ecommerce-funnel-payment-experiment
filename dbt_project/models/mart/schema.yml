@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: mart_funnel_metrics
+    description: >
+      Step-level funnel metrics: user counts, drop-off counts, drop-off percentage,
+      and cumulative conversion from the home page. One row per funnel step.
+    columns:
+      - name: step
+        description: "Funnel step name"
+        data_tests:
+          - not_null
+          - unique
+      - name: step_order
+        description: "Numeric ordering of funnel steps (1=Home, 4=Confirmation)"
+        data_tests:
+          - not_null
+      - name: users
+        description: "Number of users who reached this step"
+        data_tests:
+          - not_null
+      - name: drop_off_count
+        description: "Users lost between the previous step and this step"
+      - name: drop_off_pct
+        description: "Percentage of users from the previous step who did not proceed"
+      - name: conversion_from_home_pct
+        description: "Cumulative percentage of home page visitors who reached this step"
+
+  - name: mart_funnel_segments
+    description: >
+      Funnel performance broken down by device × gender. Used for identifying
+      which user segments show the highest payment drop-off.
+    columns:
+      - name: device
+        description: "Device type: mobile, desktop, or unknown"
+        data_tests:
+          - not_null
+      - name: gender
+        description: "User gender: male, female, or unknown"
+        data_tests:
+          - not_null
+      - name: home_users
+        description: "Total users in this device × gender segment"
+        data_tests:
+          - not_null
+      - name: payment_dropoff_pct
+        description: "Percentage of payment page visitors who did not complete the purchase"
+
+  - name: mart_experiment_results
+    description: >
+      Cleaned A/B test data. One row per user with valid group/page assignments,
+      conversion outcome, and country. Source for all statistical tests.
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: experiment_group
+        description: "Experiment group: control or treatment"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['control', 'treatment']
+      - name: converted
+        description: "Conversion outcome: 0 or 1"
+        data_tests:
+          - not_null
